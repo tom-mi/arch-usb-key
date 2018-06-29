@@ -1,0 +1,81 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  pre_tasks:
+    - name: Download archlinux iso
+      get_url:
+        url: '{{ iso_url }}'
+        checksum: '{{ iso_checksum }}'
+        dest: '{{ playbook_dir }}/{{ iso_filename }}'
+
+    - name: Link iso to version-agnostic filename
+      file:
+        dest: '{{ playbook_dir }}/archlinux.iso'
+        state: link
+        src: '{{ playbook_dir }}/{{ iso_filename }}'
+        follow: no
+
+    - name: Change permissions to allow deletion
+      file:
+        path: '{{ playbook_dir }}/{{ item }}'
+        mode: u+w
+        recurse: yes
+        follow: no
+      with_items:
+        - rootfs_files
+
+    - name: Remove possibly existing old folders
+      file:
+        path: '{{ playbook_dir }}/{{ item }}'
+        state: absent
+        mode: u+w
+      with_items:
+        - iso_files
+        - rootfs_files
+
+    - name: Extract iso
+      command: '7z x -oiso_files {{ playbook_dir }}/archlinux.iso'
+
+    - name: Unsquash root fs
+      command: unsquashfs -dest rootfs_files iso_files/arch/x86_64/airootfs.sfs
+
+  roles:
+    - keyboard
+    - dotfiles
+
+  post_tasks:
+    - name: Remove the original root fs
+      file:
+        path: iso_files/arch/x86_64/airootfs.sfs
+        state: absent
+
+    - name: Recreate the root fs
+      command: mksquashfs rootfs_files iso_files/arch/x86_64/airootfs.sfs
+
+    - name: Update checksum of root fs
+      shell: sha256sum airootfs.sfs > airootfs.sha512
+      args:
+        chdir: '{{ playbook_dir }}/iso_files/arch/x86_64'
+
+    - name: Generate remastered iso
+      command: >
+        xorriso -as mkisofs
+         -iso-level 3
+         -full-iso9660-filenames
+         -volid "ARCH_{{ iso_version }}_REMASTERED"
+         -eltorito-boot isolinux/isolinux.bin
+         -eltorito-catalog isolinux/boot.cat
+         -no-emul-boot -boot-load-size 4 -boot-info-table
+         -isohybrid-mbr iso_files/isolinux/isohdpfx.bin
+         -eltorito-alt-boot
+         -e EFI/archiso/efiboot.img
+         -no-emul-boot -isohybrid-gpt-basdat
+         -output "archlinux-{{ iso_version }}-remastered.iso"
+         iso_files
+
+    - name: Link remastered iso to version-agnostic filenmae
+      file:
+        dest: '{{ playbook_dir }}/archlinux-remastered.iso'
+        state: link
+        src: '{{ playbook_dir }}/archlinux-{{ iso_version }}-remastered.iso'
+        follow: no

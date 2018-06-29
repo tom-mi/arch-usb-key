@@ -1,0 +1,9 @@
+---
+- name: copy dotfiles
+  copy:
+    src: '{{ item }}'
+    dest: 'rootfs_files/root/.{{ item }}'
+  with_items:
+    - bashrc
+    - vimrc
+    - screenrc

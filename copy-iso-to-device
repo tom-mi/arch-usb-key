@@ -1,0 +1,39 @@
+#!/bin/bash
+
+set -eu
+
+ISO=archlinux-remastered.iso
+
+if [[ $# -ne 1 ]]; then
+  echo "Usage: $0 <target-device>"
+  exit 1
+fi
+
+if [[ ! -f "$ISO" ]]; then
+  echo "$ISO is not present. Run ./download-iso first."
+  exit 1
+fi
+
+DEST=$1
+
+if [[ ! -b "$DEST" ]]; then
+  echo "Target $DEST does not exist or is not a block device."
+  exit 1
+fi
+
+MOUNTS=$( mount | grep "$DEST" || true )
+
+if [[ ! -z "$MOUNTS" ]]; then
+  echo "$DEST or a partition on that device is mounted:"
+  echo -n "$MOUNTS"
+  exit 1
+fi
+
+CMD="dd if=$ISO of=$DEST oflag=direct bs=8M status=progress"
+
+echo "Executing '$CMD', okay?"
+echo "Press CTRL+C to cancel, anything else to continue."
+
+read
+
+$CMD
