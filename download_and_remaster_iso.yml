@@ -42,6 +42,7 @@
   roles:
     - keyboard
     - dotfiles
+    - use-bash
 
   post_tasks:
     - name: Remove the original root fs

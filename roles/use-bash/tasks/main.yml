@@ -1,0 +1,5 @@
+---
+- name: Use bash as login shell for root
+  lineinfile:
+    line: 'root:x:0:0::/root:/bin/bash'
+    regexp: '^root:'
