@@ -3,3 +3,4 @@ iso_version: 2018.06.01
 iso_filename: 'archlinux-{{ iso_version }}-x86_64.iso'
 iso_url: 'http://ftp.uni-kl.de/pub/linux/archlinux/iso/{{ iso_version }}/{{ iso_filename }}'
 iso_checksum: 'sha1:7bf795015e901eae74b030cdd7341f4860b192ec'
+iso_label: 'ARCH_201806'

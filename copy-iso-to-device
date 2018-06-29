@@ -32,7 +32,7 @@ fi
 CMD="dd if=$ISO of=$DEST oflag=direct bs=8M status=progress"
 
 echo "Executing '$CMD', okay?"
-echo "Press CTRL+C to cancel, anything else to continue."
+echo "Press CTRL+C to cancel, ENTER continue."
 
 read
 
