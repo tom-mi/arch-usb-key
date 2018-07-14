@@ -3,7 +3,9 @@
 Remaster the ArchLinux USB image a little bit to be more convenient for me (... probably only for me).
 
 Currently, that is:
-- change the keyboard layout
+- configure console
+    - change the keyboard layout
+    - change the console font
 - copy some dotfiles
 - change the login shell to bash
 - install additional packages:
@@ -15,6 +17,7 @@ Currently, that is:
     - tmux
     - wireshark-cli
 - install a script to configure wifi by scanning a QR-code with the webcam
+- add a static MOTD
 
 Feel free to copy this code and adapt it to your needs.
 
@@ -22,7 +25,7 @@ Feel free to copy this code and adapt it to your needs.
 
 Install prerequisites
 
-    pacman -S ansible libisoburn p7zip
+    pacman -S ansible arch-install-scripts libisoburn p7zip
 
 Download & remaster iso
 
