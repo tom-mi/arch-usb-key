@@ -1,7 +1,0 @@
----
-
-- name: Set console keyboard layout
-  copy:
-    dest: rootfs_files/etc/vconsole.conf
-    content: 'KEYMAP=dvorak-programmer'
-

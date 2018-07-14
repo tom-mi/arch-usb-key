@@ -1,0 +1,5 @@
+---
+- name: copy motd
+  copy:
+    src: motd
+    dest: rootfs_files/etc/motd

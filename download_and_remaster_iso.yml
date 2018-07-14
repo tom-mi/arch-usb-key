@@ -10,6 +10,7 @@
       - htop
       - tmux
       - wireshark-cli
+      - terminus-font  # required for console
       - zbar  # required for qr-wifi
   pre_tasks:
     - name: Download archlinux iso
@@ -42,11 +43,12 @@
       command: unsquashfs -dest rootfs_files iso_files/arch/x86_64/airootfs.sfs
 
   roles:
-    - keyboard
+    - console
     - dotfiles
     - use-bash
     - packages
     - qr-wifi
+    - motd
 
   post_tasks:
     - name: Remove the original root fs

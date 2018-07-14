@@ -1,0 +1,7 @@
+---
+
+- name: Copy console settings
+  copy:
+    src: vconsole.conf
+    dest: rootfs_files/etc/vconsole.conf
+
