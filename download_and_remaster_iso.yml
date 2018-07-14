@@ -3,6 +3,7 @@
   connection: local
   vars:
     packages:
+      - ack
       - acpi
       - bash-completion
       - bwm-ng

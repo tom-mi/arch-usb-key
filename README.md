@@ -8,14 +8,7 @@ Currently, that is:
     - change the console font
 - copy some dotfiles
 - change the login shell to bash
-- install additional packages:
-    - bash-completion
-    - bwm-ng
-    - calc
-    - elinks
-    - htop
-    - tmux
-    - wireshark-cli
+- install additional packages
 - install a script to configure wifi by scanning a QR-code with the webcam
 - add a static MOTD
 
