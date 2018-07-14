@@ -1,7 +1,10 @@
 ---
-
-- name: Copy console settings
+- name: copy console settings
   copy:
     src: vconsole.conf
     dest: rootfs_files/etc/vconsole.conf
 
+- name: adapt /etc/issue to fix font setting
+  copy:
+    src: issue
+    dest: rootfs_files/etc/issue
