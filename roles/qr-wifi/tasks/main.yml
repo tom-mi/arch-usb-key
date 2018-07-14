@@ -1,0 +1,6 @@
+---
+- name: download qr-wifi script
+  get_url:
+    url: https://raw.githubusercontent.com/tom-mi/arch-qr-wifi/master/qr_wifi.py
+    dest: rootfs_files/usr/local/bin/qr-wifi
+    mode: 0755

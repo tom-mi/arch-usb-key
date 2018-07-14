@@ -6,6 +6,7 @@
       - bash-completion
       - calc
       - wireshark-cli
+      - zbar  # required for qr-wifi
   pre_tasks:
     - name: Download archlinux iso
       get_url:
@@ -41,6 +42,7 @@
     - dotfiles
     - use-bash
     - packages
+    - qr-wifi
 
   post_tasks:
     - name: Remove the original root fs
