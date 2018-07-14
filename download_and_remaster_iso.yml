@@ -4,7 +4,11 @@
   vars:
     packages:
       - bash-completion
+      - bwm-ng
       - calc
+      - elinks
+      - htop
+      - tmux
       - wireshark-cli
       - zbar  # required for qr-wifi
   pre_tasks:

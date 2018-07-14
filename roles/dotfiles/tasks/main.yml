@@ -1,4 +1,11 @@
 ---
+- name: create directories
+  file:
+    dest: 'rootfs_files/root/.{{ item }}'
+    state: directory
+  with_items:
+    - elinks
+
 - name: copy dotfiles
   copy:
     src: '{{ item }}'
@@ -6,4 +13,4 @@
   with_items:
     - bashrc
     - vimrc
-    - screenrc
+    - elinks/elinks.conf
