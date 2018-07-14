@@ -1,0 +1,17 @@
+---
+- name: checkout liquidprompt
+  git:
+    repo: git@github.com:nojhan/liquidprompt.git
+    dest: rootfs_files/root/.stuff/liquidprompt
+    depth: 1
+
+- name: symlink liquidprompt
+  file:
+    dest: rootfs_files/root/.bashrc.d/liquidprompt.bash
+    src: ../.stuff/liquidprompt/liquidprompt
+    state: link
+
+- name: copy prompt config
+  copy:
+    src: liquidprompt_custom.bash
+    dest: rootfs_files/root/.bashrc.d/liquidprompt_custom.bash

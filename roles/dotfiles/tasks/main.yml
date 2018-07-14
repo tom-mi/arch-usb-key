@@ -4,7 +4,9 @@
     dest: 'rootfs_files/root/.{{ item }}'
     state: directory
   with_items:
+    - bashrc.d
     - elinks
+    - stuff
 
 - name: copy dotfiles
   copy:
@@ -12,5 +14,6 @@
     dest: 'rootfs_files/root/.{{ item }}'
   with_items:
     - bashrc
+    - bashrc.d/aliases.bash
     - vimrc
     - elinks/elinks.conf

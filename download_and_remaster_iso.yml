@@ -3,10 +3,13 @@
   connection: local
   vars:
     packages:
+      - acpi
       - bash-completion
       - bwm-ng
       - calc
+      - cmatrix
       - elinks
+      - ipython
       - htop
       - tmux
       - wireshark-cli
@@ -45,6 +48,7 @@
   roles:
     - console
     - dotfiles
+    - liquidprompt
     - use-bash
     - packages
     - qr-wifi
