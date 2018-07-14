@@ -1,6 +1,11 @@
 ---
 - hosts: 127.0.0.1
   connection: local
+  vars:
+    packages:
+      - bash-completion
+      - calc
+      - wireshark-cli
   pre_tasks:
     - name: Download archlinux iso
       get_url:
@@ -15,16 +20,8 @@
         src: '{{ playbook_dir }}/{{ iso_filename }}'
         follow: no
 
-    - name: Change permissions to allow deletion
-      file:
-        path: '{{ playbook_dir }}/{{ item }}'
-        mode: u+w
-        recurse: yes
-        follow: no
-      with_items:
-        - rootfs_files
-
     - name: Remove possibly existing old folders
+      become: yes
       file:
         path: '{{ playbook_dir }}/{{ item }}'
         state: absent
@@ -43,6 +40,7 @@
     - keyboard
     - dotfiles
     - use-bash
+    - packages
 
   post_tasks:
     - name: Remove the original root fs
