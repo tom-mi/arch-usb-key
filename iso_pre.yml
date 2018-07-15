@@ -1,0 +1,29 @@
+---
+- name: Download archlinux iso
+  get_url:
+    url: '{{ iso_url }}'
+    checksum: '{{ iso_checksum }}'
+    dest: '{{ playbook_dir }}/{{ iso_filename }}'
+
+- name: Link iso to version-agnostic filename
+  file:
+    dest: '{{ playbook_dir }}/archlinux.iso'
+    state: link
+    src: '{{ playbook_dir }}/{{ iso_filename }}'
+    follow: no
+
+- name: Remove possibly existing old folders
+  become_user: root
+  file:
+    path: '{{ playbook_dir }}/{{ item }}'
+    state: absent
+    mode: u+w
+  with_items:
+    - iso_files
+    - rootfs_files
+
+- name: Extract iso
+  command: '7z x -oiso_files {{ playbook_dir }}/archlinux.iso'
+
+- name: Unsquash root fs
+  command: unsquashfs -dest rootfs_files iso_files/arch/x86_64/airootfs.sfs
