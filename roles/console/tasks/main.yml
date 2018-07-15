@@ -5,6 +5,6 @@
     dest: rootfs_files/etc/vconsole.conf
 
 - name: adapt /etc/issue to fix font setting
-  copy:
+  template:
     src: issue
     dest: rootfs_files/etc/issue

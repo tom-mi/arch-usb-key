@@ -1,0 +1,5 @@
+---
+- name: copy bash file
+  template:
+    src: colorschemes.bash
+    dest: rootfs_files/root/.bashrc.d/colorschemes.bash

@@ -2,15 +2,21 @@
 - hosts: 127.0.0.1
   connection: local
   vars:
+    console_foreground_color: dddddd
     packages:
       - ack
       - acpi
+      - aircrack-ng
       - bash-completion
+      - bettercap
       - bwm-ng
       - calc
+      - clamav
       - cmatrix
+      - dsniff
       - elinks
       - ipython
+      - hping
       - htop
       - tmux
       - wireshark-cli
@@ -54,6 +60,7 @@
     - packages
     - qr-wifi
     - motd
+    - colorschemes
 
   post_tasks:
     - name: Remove the original root fs
