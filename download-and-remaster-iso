@@ -1,3 +1,12 @@
 #!/bin/bash
 
-ansible-playbook --inventory 127.0.0.1, --ask-become-pass download_and_remaster_iso.yml
+set -eu
+
+USER=$(whoami)
+
+if [[ "$USER" == "root" ]]; then
+    echo "Run as regular user. This script already contains a sudo command"
+    exit 1
+fi
+
+sudo ansible-playbook --become-user "$USER" download_and_remaster_iso.yml

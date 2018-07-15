@@ -1,31 +1,21 @@
 ---
-- name: copy install script
-  copy:
-    src: install-packages
-    dest: rootfs_files/install-packages
-    mode: 0755
-
-- name: disable checkspace
-  lineinfile:
-    dest: rootfs_files/etc/pacman.conf
-    regexp: '^(#|)CheckSpace$'
-    line: '#CheckSpace'
-
 - name: install packages
-  command: "arch-chroot rootfs_files/ /install-packages {{ packages|join(' ') }}"
-  become: yes
-
-- name: copy list of packages
-  copy:
-    src: rootfs_files/pkglist.txt
-    dest: iso_files/arch/pkglist.x86_64.txt
-
-- name: remove install script
-  file:
-    path: rootfs_files/install-packages
-    state: absent
-
-- name: remove list of packages
-  file:
-    path: rootfs_files/pkglist.txt
-    state: absent
+  delegate_to: chroot
+  pacman:
+    pkg:
+      - ack
+      - acpi
+      - aircrack-ng
+      - bash-completion
+      - bettercap
+      - bwm-ng
+      - calc
+      - clamav
+      - cmatrix
+      - dsniff
+      - elinks
+      - ipython
+      - hping
+      - htop
+      - tmux
+      - wireshark-cli

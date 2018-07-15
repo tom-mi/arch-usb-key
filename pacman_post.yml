@@ -1,0 +1,30 @@
+---
+- name: copy package-list script
+  copy:
+    src: files/create-package-list
+    dest: rootfs_files/create-package-list
+    mode: 0755
+
+- name: create package list
+  delegate_to: chroot
+  command: /create-package-list
+
+- name: cleanup pacman cache
+  delegate_to: chroot
+  command: pacman -Scc --noconfirm
+
+- name: copy list of packages
+  copy:
+    src: rootfs_files/pkglist.txt
+    dest: iso_files/arch/pkglist.x86_64.txt
+
+- name: remove script
+  file:
+    path: rootfs_files/create-package-list
+    state: absent
+
+- name: remove list of packages
+  file:
+    path: rootfs_files/pkglist.txt
+    state: absent
+

@@ -8,3 +8,9 @@
   template:
     src: issue
     dest: rootfs_files/etc/issue
+
+- name: install packages
+  delegate_to: chroot
+  pacman:
+    pkg:
+      - zbar

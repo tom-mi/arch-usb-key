@@ -1,0 +1,15 @@
+---
+- name: enable locale in locale.gen
+  lineinfile:
+    dest: rootfs_files/etc/locale.gen
+    regexp: '^(#|){{ locale }}'
+    line: '{{ locale }}'
+
+- name: generate locale
+  command: locale-gen
+  delegate_to: chroot
+
+- name: set locale
+  copy:
+    dest: rootfs_files/etc/locale.conf
+    content: 'LANG={{ locale }}'

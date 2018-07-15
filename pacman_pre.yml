@@ -1,0 +1,19 @@
+---
+- name: disable checkspace
+  lineinfile:
+    dest: rootfs_files/etc/pacman.conf
+    regexp: '^(#|)CheckSpace$'
+    line: '#CheckSpace'
+
+- name: initialize pacman-key
+  delegate_to: chroot
+  command: pacman-key --init
+
+- name: populate archlinux keyring
+  delegate_to: chroot
+  command: pacman-key --populate archlinux
+
+- name: update pacman cache
+  delegate_to: chroot
+  pacman:
+    update_cache: yes
