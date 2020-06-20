@@ -26,4 +26,5 @@
   command: '7z x -oiso_files {{ playbook_dir }}/archlinux.iso'
 
 - name: Unsquash root fs
+  become_user: root  # gets stuck without root privileges
   command: unsquashfs -dest rootfs_files iso_files/arch/x86_64/airootfs.sfs

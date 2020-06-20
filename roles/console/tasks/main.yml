@@ -2,15 +2,14 @@
 - name: copy console settings
   copy:
     src: vconsole.conf
-    dest: rootfs_files/etc/vconsole.conf
+    dest: /etc/vconsole.conf
 
 - name: adapt /etc/issue to fix font setting
   template:
     src: issue
-    dest: rootfs_files/etc/issue
+    dest: /etc/issue
 
 - name: install packages
-  delegate_to: chroot
   pacman:
     pkg:
       - zbar

@@ -1,5 +1,6 @@
 ---
 - name: copy package-list script
+  become_user: root
   copy:
     src: files/create-package-list
     dest: rootfs_files/create-package-list
@@ -10,8 +11,12 @@
   command: /create-package-list
 
 - name: cleanup pacman cache
-  delegate_to: chroot
-  command: pacman -Scc --noconfirm
+  become_user: root
+  file:
+    path: '{{ item }}'
+    state: absent
+  with_fileglob:
+    - 'rootfs_files/var/cache/pacman/pkg/*'
 
 - name: copy list of packages
   copy:
@@ -19,12 +24,13 @@
     dest: iso_files/arch/pkglist.x86_64.txt
 
 - name: remove script
+  become_user: root
   file:
     path: rootfs_files/create-package-list
     state: absent
 
 - name: remove list of packages
+  become_user: root
   file:
     path: rootfs_files/pkglist.txt
     state: absent
-

@@ -1,32 +1,50 @@
 ---
 - hosts: localhost
-  connection: local
+
+  tasks:
+    - name: teardown chroot
+      include: teardown_chroot.yml
+      delegate_to: localhost
+
+    - name: iso pre
+      include: iso_pre.yml
+      delegate_to: localhost
+
+    - name: setup chroot
+      include: setup_chroot.yml
+      delegate_to: localhost
+
+    - name: pacman pre
+      include: pacman_pre.yml
+      delegate_to: localhost
+
+- hosts: chroot
 
   vars:
     console_foreground_color: dddddd
     locale: en_DK.UTF-8
 
-  pre_tasks:
-    - name: iso pre
-      include: iso_pre.yml
-
-    - name: pacman pre
-      include: pacman_pre.yml
-
   roles:
     - console
-    - locale
-    - dotfiles
-    - liquidprompt
-    - use-bash
-    - packages
-    - qr-wifi
-    - motd
-    - colorschemes
+#    - locale
+#    - dotfiles
+#    - liquidprompt
+#    - use-bash
+#    - packages
+#    - qr-wifi
+#    - motd
+#    - colorschemes
 
-  post_tasks:
+- hosts: localhost
+  tasks:
     - name: pacman post
       include: pacman_post.yml
+      delegate_to: localhost
+
+    - name: teardown chroot
+      include: teardown_chroot.yml
+      delegate_to: localhost
 
     - name: iso post
       include: iso_post.yml
+      delegate_to: localhost

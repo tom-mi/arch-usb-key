@@ -1,7 +1,7 @@
 ---
 - name: create directories
   file:
-    dest: 'rootfs_files/root/.{{ item }}'
+    dest: '/root/.{{ item }}'
     state: directory
   with_items:
     - bashrc.d
@@ -11,7 +11,7 @@
 - name: copy dotfiles
   copy:
     src: '{{ item }}'
-    dest: 'rootfs_files/root/.{{ item }}'
+    dest: '/root/.{{ item }}'
   with_items:
     - bashrc
     - bashrc.d/aliases.bash

@@ -1,6 +1,5 @@
 ---
 - name: install packages
-  delegate_to: chroot
   pacman:
     pkg:
       - ack

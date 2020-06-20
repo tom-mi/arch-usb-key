@@ -1,0 +1,13 @@
+---
+
+- name: unmount files for chroot
+  become_user: root
+  command: 'umount -l rootfs_files{{ item.path }}'
+  with_items: '{{ chroot_mounts|reverse|list }}'
+  ignore_errors: yes
+
+- name: remove temporary fstab
+  become_user: root
+  file:
+    path: /tmp/arch-usb-key_fstab
+    state: absent

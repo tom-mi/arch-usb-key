@@ -1,0 +1,13 @@
+---
+
+- name: mount files for chroot
+  become_user: root
+  mount:
+    src: '{{ item.path }}'
+    path: 'rootfs_files{{ item.path }}'
+    fstype: '{{ item.fstype }}'
+    opts: '{{ item.opts }}'
+    state: mounted
+    fstab: /tmp/arch-usb-key_fstab
+  with_items: '{{ chroot_mounts }}'
+
