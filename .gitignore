@@ -2,3 +2,4 @@
 *.iso
 /iso_files
 /rootfs_files
+.idea
