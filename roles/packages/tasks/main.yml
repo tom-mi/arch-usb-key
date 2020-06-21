@@ -13,8 +13,14 @@
       - cmatrix
       - dsniff
       - elinks
-      - ipython
       - hping
       - htop
+      - ipython
+      - jq
+      - qrencode
       - tmux
+      - tree
+      - vim-ctrlp
+      - vimpager
       - wireshark-cli
+      - yq
