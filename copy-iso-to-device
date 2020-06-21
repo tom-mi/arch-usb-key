@@ -2,7 +2,7 @@
 
 set -eu
 
-ISO=archlinux-remastered.iso
+ISO=arch-usb-key.iso
 
 if [[ $# -ne 1 ]]; then
   echo "Usage: $0 <target-device>"

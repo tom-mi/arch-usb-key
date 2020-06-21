@@ -1,5 +1,6 @@
 *.retry
 *.iso
+/archlive
 /iso_files
 /rootfs_files
 .idea

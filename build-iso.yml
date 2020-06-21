@@ -1,0 +1,79 @@
+---
+- hosts: localhost
+  become: yes
+
+  tasks:
+    - name: Remove possibly existing old folders
+      file:
+        path: '{{ playbook_dir }}/{{ item }}'
+        state: absent
+      with_items:
+        - archlive
+
+    - name: Copy base profile
+      copy:
+        src: /usr/share/archiso/configs/releng/
+        dest: archlive
+        mode: preserve
+
+    - name: Load configuration
+      include_vars: configuration.yml
+
+    - name: Configure packages for installation
+      lineinfile:
+        path: archlive/packages.x86_64
+        line: '{{ item }}'
+      with_items:
+        - ansible  # required for installation of roles
+        - git  # required for liquidprompt
+        - zbar  # required for qr-wifi
+
+    - name: Configure custom packages for installation
+      lineinfile:
+        path: archlive/packages.x86_64
+        line: '{{ item }}'
+      with_items: '{{ packages }}'
+
+    - name: make directory for airootfs customization
+      file:
+        path: archlive/airootfs/root/ansible
+        state: directory
+    - name: copy files for local playbook
+      copy:
+        src: '{{ item }}'
+        dest: archlive/airootfs/root/ansible/
+      with_items:
+        - ansible.cfg
+        - configuration.yml
+        - customize-airootfs.yml
+        - inventory
+        - roles
+
+    - name: extend customize-airootfs script
+      lineinfile:
+        path: archlive/airootfs/root/customize_airootfs.sh
+        line: '{{ item }}'
+      with_items:
+        - 'cd /root/ansible && ansible-playbook customize-airootfs.yml'
+        - 'rm -r /root/ansible'
+        - 'rm -r /root/.ansible'
+
+    - name: determine git version
+      command: git describe --dirty --always
+      register: git_version
+
+    - name: build
+      command: './build.sh -V {{ git_version.stdout }}'
+      args:
+        chdir: archlive
+
+    - name: remove old symlink
+      file:
+        dest: arch-usb-key.iso
+        state: absent
+
+    - name: create symlink to iso
+      file:
+        src: 'archlive/out/archlinux-{{ git_version.stdout }}-x86_64.iso'
+        dest: arch-usb-key.iso
+        state: link

@@ -4,8 +4,3 @@
     url: https://raw.githubusercontent.com/tom-mi/arch-qr-wifi/master/qr_wifi.py
     dest: /usr/local/bin/qr-wifi
     mode: 0755
-
-- name: install packages
-  pacman:
-    pkg:
-      - terminus-font

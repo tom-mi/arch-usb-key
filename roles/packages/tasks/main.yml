@@ -18,6 +18,7 @@
       - ipython
       - jq
       - qrencode
+      - terminus-font
       - tmux
       - tree
       - vim-ctrlp

@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  pre_tasks:
+    - include_vars: configuration.yml
+  roles:
+    - console
+    - locale
+    - dotfiles
+    - liquidprompt
+    - use-bash
+    - qr-wifi
+    - motd
+    - colorschemes

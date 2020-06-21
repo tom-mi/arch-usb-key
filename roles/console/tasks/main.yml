@@ -8,8 +8,3 @@
   template:
     src: issue
     dest: /etc/issue
-
-- name: install packages
-  pacman:
-    pkg:
-      - zbar

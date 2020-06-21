@@ -1,2 +1,1 @@
-localhost    ansible_connection=local ansible_become=yes
-chroot       ansible_host=rootfs_files ansible_connection=chroot ansible_become=no
+localhost    ansible_connection=local

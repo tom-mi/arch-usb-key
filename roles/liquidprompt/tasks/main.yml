@@ -1,9 +1,4 @@
 ---
-- name: install packages
-  pacman:
-    pkg:
-      - git
-
 - name: checkout liquidprompt
   git:
     repo: https://github.com/nojhan/liquidprompt.git

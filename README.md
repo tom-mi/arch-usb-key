@@ -20,11 +20,11 @@ Feel free to copy this code and adapt it to your needs.
 
 Install prerequisites
 
-    pacman -S ansible arch-install-scripts libisoburn p7zip
+    pacman -S ansible archiso
 
-Download & remaster iso (uses `sudo`)
+Download & remaster iso (enter password for `sudo` or `su` when asked for `BECOME password`)
 
-    ./download-and-remaster-iso
+    ./build-iso
 
 Flash USB key (as root)
 
@@ -32,8 +32,7 @@ Flash USB key (as root)
 
 ## Resources
 
-- https://wiki.archlinux.org/index.php/Category:Getting_and_installing_Arch
-- https://wiki.archlinux.org/index.php/Remastering_the_Install_ISO
+- https://wiki.archlinux.org/index.php/Archiso
 
 ## License
 
