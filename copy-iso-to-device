@@ -10,7 +10,7 @@ if [[ $# -ne 1 ]]; then
 fi
 
 if [[ ! -f "$ISO" ]]; then
-  echo "$ISO is not present. Run ./download-iso first."
+  echo "$ISO is not present. Run ./download-and-remaster-iso first."
   exit 1
 fi
 
