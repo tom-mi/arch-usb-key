@@ -24,4 +24,4 @@ packages:
   - yq
 
 console_foreground_color: dddddd
-locale: en_DK.UTF-8
+locale: en_DK.UTF-8 UTF-8
