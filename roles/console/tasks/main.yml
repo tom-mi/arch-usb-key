@@ -1,6 +1,6 @@
 ---
 - name: copy console settings
-  copy:
+  template:
     src: vconsole.conf
     dest: /etc/vconsole.conf
 
