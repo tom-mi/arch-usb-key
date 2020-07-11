@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  pre_tasks:
+    - include_vars: configuration.yml
+  tasks:
+    - name: Install packages
+      pacman:
+        pkg: '{{ packages }}'
+
+- name: apply other roles
+  import_playbook: customize-airootfs.yml

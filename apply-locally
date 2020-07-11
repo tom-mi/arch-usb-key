@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ansible-playbook apply-locally.yml --become --ask-become-pass $@

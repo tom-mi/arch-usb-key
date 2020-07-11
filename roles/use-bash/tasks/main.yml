@@ -2,5 +2,5 @@
 - name: Use bash as login shell for root
   lineinfile:
     path: /etc/passwd
-    line: 'root:x:0:0::/root:/bin/bash'
+    line: 'root:x:0:0:root:/root:/bin/bash'
     regexp: '^root:'
