@@ -2,6 +2,7 @@ packages:
   - ack
   - acpi
   - aircrack-ng
+  - alsa-utils
   - bash-completion
   - bettercap
   - bwm-ng
@@ -10,14 +11,21 @@ packages:
   - cmatrix
   - dsniff
   - elinks
+  - fbgrab
+  - fbv
+  - fbida
   - hping
   - htop
   - ipython
   - jq
+  - kmscon
+  - mpv
   - qrencode
   - terminus-font
+  - terminus-font-otb
   - tmux
   - tree
+  - ttf-dejavu
   - vim-ctrlp
   - vimpager
   - wireshark-cli
@@ -25,4 +33,11 @@ packages:
 
 console_foreground_color: dddddd
 locale: en_DK.UTF-8 UTF-8
+lang: en_DK.UTF-8
 keymap: dvorak-programmer
+xkb:
+  layout: us
+  variant: dvp
+  options:
+    - lv3:ralt_switch
+    - compose:102

@@ -1,0 +1,31 @@
+---
+- name: create config directory
+  file:
+    path: /etc/kmscon
+    state: directory
+
+- name: copy config file
+  template:
+    src: kmscon.conf
+    dest: /etc/kmscon/kmscon.conf
+
+- name: enable kmscon on some ttys
+  systemd:
+    service: kmsconvt@{{ item }}.service
+    enabled: yes
+  with_items:
+    - tty2
+
+- name: allow root login via kmscon
+  lineinfile:
+    path: /etc/securetty
+    line: '{{ item }}'
+  with_items:
+    - pts/0
+    - pts/1
+    - pts/2
+    - pts/3
+    - pts/4
+    - pts/5
+    - pts/6
+    - pts/7

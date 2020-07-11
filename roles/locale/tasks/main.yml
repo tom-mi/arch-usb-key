@@ -11,4 +11,4 @@
 - name: set locale
   copy:
     dest: '/etc/locale.conf'
-    content: 'LANG={{ locale }}'
+    content: 'LANG={{ lang }}'

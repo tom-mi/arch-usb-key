@@ -22,7 +22,6 @@ function colorscheme-matrix() {
     clear
   else
     echo "Unsupported terminal $TERM"
-    exit 1
   fi
 }
 
@@ -33,6 +32,5 @@ function colorscheme-default() {
     clear
   else
     echo "Unsupported terminal $TERM"
-    exit 1
   fi
 }
