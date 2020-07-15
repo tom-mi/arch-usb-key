@@ -12,8 +12,9 @@ packages:
   - dsniff
   - elinks
   - fbgrab
-  - fbv
   - fbida
+  - fbv
+  - gnu-free-fonts
   - hping
   - htop
   - ipython
