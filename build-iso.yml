@@ -16,6 +16,21 @@
         dest: archlive
         mode: preserve
 
+    - name: Create cache marker file
+      file:
+        dest: archlive/CACHEDIR.TAG
+        state: touch
+
+    - name: Create output directory
+      file:
+        dest: out
+        state: directory
+
+    - name: Create cache marker file
+      file:
+        dest: out/CACHEDIR.TAG
+        state: touch
+
     - name: Load configuration
       include_vars: configuration.yml
 
@@ -63,17 +78,4 @@
       register: git_version
 
     - name: build
-      command: './build.sh -V {{ git_version.stdout }}'
-      args:
-        chdir: archlive
-
-    - name: remove old symlink
-      file:
-        dest: arch-usb-key.iso
-        state: absent
-
-    - name: create symlink to iso
-      file:
-        src: 'archlive/out/archlinux-{{ git_version.stdout }}-x86_64.iso'
-        dest: arch-usb-key.iso
-        state: link
+      command: 'mkarchiso -v -w /tmp/archiso-tmp -o out archlive'
