@@ -2,4 +2,4 @@
 - name: copy bash file
   template:
     src: colorschemes.bash
-    dest: /root/.bashrc.d/colorschemes.bash
+    dest: '{{ root_prefix }}/root/.bashrc.d/colorschemes.bash'

@@ -2,4 +2,4 @@
 - name: copy motd
   copy:
     src: motd
-    dest: /etc/motd
+    dest: '{{ root_prefix }}/etc/motd'

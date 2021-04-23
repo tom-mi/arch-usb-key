@@ -2,9 +2,9 @@
 - name: copy console settings
   template:
     src: vconsole.conf
-    dest: /etc/vconsole.conf
+    dest: '{{ root_prefix }}/etc/vconsole.conf'
 
 - name: adapt /etc/issue to fix font setting
   template:
     src: issue
-    dest: /etc/issue
+    dest: '{{ root_prefix }}/etc/issue'

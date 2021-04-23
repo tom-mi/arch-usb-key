@@ -1,6 +1,6 @@
 ---
 - name: Use bash as login shell for root
   lineinfile:
-    path: /etc/passwd
+    path: '{{ root_prefix }}/etc/passwd'
     line: 'root:x:0:0:root:/root:/bin/bash'
     regexp: '^root:'

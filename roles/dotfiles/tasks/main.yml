@@ -1,9 +1,9 @@
 ---
 - name: create directories
   file:
-    dest: '/root/.{{ item }}'
+    dest: '{{ root_prefix }}/root/.{{ item }}'
     state: directory
-  with_items:
+  with_list:
     - bashrc.d
     - elinks
     - stuff
@@ -11,9 +11,10 @@
 - name: copy dotfiles
   copy:
     src: '{{ item }}'
-    dest: '/root/.{{ item }}'
-  with_items:
+    dest: '{{ root_prefix }}/root/.{{ item }}'
+  with_list:
     - bashrc
+    - bash_profile
     - bashrc.d/aliases.bash
     - vimrc
     - elinks/elinks.conf

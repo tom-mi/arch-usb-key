@@ -1,5 +1,4 @@
 *.retry
-*.iso
 /archlive
 .idea
 /out

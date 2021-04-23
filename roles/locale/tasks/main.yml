@@ -1,14 +1,25 @@
 ---
-- name: enable locale in locale.gen
+- name: enable locale in locale.gen (locally)
   lineinfile:
-    dest: /etc/locale.gen
+    dest: '{{ root_prefix }}/etc/locale.gen'
     regexp: '^(#|){{ locale }}'
     line: '{{ locale }}'
+  when: running_locally
 
-- name: generate locale
+- name: generate locale (locally)
   command: locale-gen
+  when: running_locally
+
+- name: enable locale in locale.gen (airootfs)
+  lineinfile:
+    path: '{{ root_prefix }}/etc/pacman.d/hooks/40-locale-gen.hook'
+    line: |-
+      Exec = /bin/sh -c "sed -i 's/#\({{ locale }}\)/\1/' /etc/locale.gen && locale-gen"
+    regexp: '^Exec'
+    create: no
+  when: not running_locally
 
 - name: set locale
   copy:
-    dest: '/etc/locale.conf'
+    dest: '{{ root_prefix }}/etc/locale.conf'
     content: 'LANG={{ lang }}'

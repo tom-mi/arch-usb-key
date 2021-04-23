@@ -1,5 +1,9 @@
 ---
 - hosts: localhost
+  become: yes
+  vars:
+    root_prefix: ''
+    running_locally: true
   pre_tasks:
     - include_vars: configuration.yml
   tasks:
@@ -7,5 +11,9 @@
       pacman:
         pkg: '{{ packages }}'
 
-- name: apply other roles
-  import_playbook: customize-airootfs.yml
+    - name: Apply configuration
+      include_role:
+        name: '{{ config_role }}'
+      loop: '{{ roles }}'
+      loop_control:
+        loop_var: config_role

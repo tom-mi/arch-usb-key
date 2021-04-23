@@ -2,16 +2,18 @@
 - name: checkout liquidprompt
   git:
     repo: https://github.com/nojhan/liquidprompt.git
-    dest: '/root/.stuff/liquidprompt'
+    dest: '{{ root_prefix }}/root/.stuff/liquidprompt'
     depth: 1
 
 - name: symlink liquidprompt
   file:
-    dest: '/root/.bashrc.d/liquidprompt.bash'
-    src: ../.stuff/liquidprompt/liquidprompt
+    dest: '{{ root_prefix }}/root/.bashrc.d/liquidprompt.bash'
+    src: /root/.stuff/liquidprompt/liquidprompt
     state: link
+    force: yes
+    follow: no
 
 - name: copy prompt config
   copy:
     src: liquidprompt_custom.bash
-    dest: '/root/.bashrc.d/liquidprompt_custom.bash'
+    dest: '{{ root_prefix }}/root/.bashrc.d/liquidprompt_custom.bash'

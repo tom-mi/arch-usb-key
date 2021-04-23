@@ -1,26 +1,35 @@
 ---
 - name: create config directory
   file:
-    path: /etc/kmscon
+    path: '{{ root_prefix }}/etc/kmscon'
     state: directory
 
 - name: copy config file
   template:
     src: kmscon.conf
-    dest: /etc/kmscon/kmscon.conf
+    dest: '{{ root_prefix }}/etc/kmscon/kmscon.conf'
 
 - name: enable kmscon on some ttys
-  systemd:
-    service: kmsconvt@{{ item }}.service
-    enabled: yes
-  with_items:
+  file:
+    dest: '{{ root_prefix }}/etc/systemd/system/multi-user.target.wants/kmsconvt@{{ item }}.service'
+    src: '/usr/lib/systemd/system/kmsconvt@.service'
+    state: link
+    force: yes
+    follow: no
+  with_list:
     - tty2
+
+- name: copy default /etc/securetty (airootfs)
+  copy:
+    src: /usr/share/factory/etc/securetty
+    dest: '{{ root_prefix }}/etc/securetty'
+  when: not running_locally
 
 - name: allow root login via kmscon
   lineinfile:
-    path: /etc/securetty
+    path: '{{ root_prefix }}/etc/securetty'
     line: '{{ item }}'
-  with_items:
+  with_list:
     - pts/0
     - pts/1
     - pts/2

@@ -23,7 +23,6 @@ packages:
   - mpv
   - qrencode
   - terminus-font
-  - terminus-font-otb
   - tmux
   - tree
   - ttf-dejavu
@@ -31,6 +30,17 @@ packages:
   - vimpager
   - wireshark-cli
   - yq
+
+roles:
+  - console
+  - locale
+  - dotfiles
+  - liquidprompt
+  - use-bash
+  - qr-wifi
+  - motd
+  - colorschemes
+  - kmscon
 
 console_foreground_color: dddddd
 locale: en_DK.UTF-8 UTF-8
