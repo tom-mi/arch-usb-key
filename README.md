@@ -30,6 +30,10 @@ Flash USB key (as root)
 
     ./copy-iso-to-device out/archlinux-YYYY.MM.DD-x86_64.iso /dev/sdX
 
+Apply the same configuration (packages, config files) to your current installation instead (careful here!)
+
+    ./apply-locally
+
 ## Resources
 
 - https://wiki.archlinux.org/index.php/Archiso
