@@ -28,7 +28,7 @@ Download & remaster iso (enter password for `sudo` or `su` when asked for `BECOM
 
 Flash USB key (as root)
 
-    ./copy-iso-to-device /dev/sdX
+    ./copy-iso-to-device out/archlinux-YYYY.MM.DD-x86_64.iso /dev/sdX
 
 ## Resources
 
