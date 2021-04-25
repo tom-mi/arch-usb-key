@@ -47,7 +47,7 @@ if confirm "Install microcode updates"; then
         pacman --quiet -S intel-ucode
         break
         ;;
-      Amd)
+      AMD)
         pacman --quiet -S amd-ucode
         break
         ;;
