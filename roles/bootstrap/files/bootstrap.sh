@@ -29,7 +29,7 @@ echo "Press CTRL+C to cancel (at any time), ENTER continue."
 read
 
 if confirm "Install essential packages"; then
-  pacstrap "$DEST" base linux linux-firmware
+  pacstrap "$DEST" base linux linux-firmware inetutils iwd dhcpcd
 fi
 
 if confirm "Generate fstab"; then
