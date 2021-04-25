@@ -67,4 +67,17 @@ if confirm "Copy sample bootloader configuration"; then
   echo "Adapt the configuration under /boot/loader/entries/arch.conf to your needs."
 fi
 
+if confirm "Install arch-usb-key repository"; then
+  pacman -Sy ansible git
+  mkdir -p /root/.stuff
+  if [[ ! -d /root/.stuff/arch-usb-key ]]; then
+    pushd /root/.stuff
+    git clone https://github.com/tom-mi/arch-usb-key.git
+    echo "Repository checked out to /root/.stuff/arch-usb-key"
+    popd
+  else
+    echo "Repository /root/.stuff/arch-usb-key already exists"
+  fi
+fi
+
 echo "Installation finished. After adapting the bootloader config, exit the chroot environment, unmount all partitions & reboot."
