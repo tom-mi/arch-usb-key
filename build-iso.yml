@@ -66,6 +66,10 @@
       loop_control:
         loop_var: config_role
 
+    - name: Copy bootstrap script
+      include_role:
+        name: bootstrap
+
     - name: Build
       command: 'mkarchiso -v -w /tmp/archiso-tmp -o out archlive'
       become: yes

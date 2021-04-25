@@ -1,0 +1,17 @@
+---
+- name: copy bootstrap script
+  copy:
+    src: bootstrap.sh
+    dest: '{{ root_prefix }}/usr/local/bin/bootstrap-installation'
+    mode: 0755
+
+- name: copy finalization script
+  template:
+    src: finalize.sh
+    dest: '{{ root_prefix }}/usr/local/share/finalize-installation'
+
+- name: add bootstrap script to profiledef.sh
+  lineinfile:
+    dest: 'archlive/profiledef.sh'
+    line: '  ["/usr/local/bin/bootstrap-installation"]="0:0:755"'
+    insertafter: '^file_permissions'
